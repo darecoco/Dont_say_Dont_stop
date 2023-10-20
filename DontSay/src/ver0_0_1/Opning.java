@@ -1,6 +1,8 @@
 package ver0_0_1;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import javax.swing.*;
 
@@ -13,10 +15,10 @@ public class Opning {
 	private int storyNum = 0;
 	
 	private String sceneName[] = {
-			"unusless.png",
-			"holy.png"
+			"001.png",
+			"002.png"
 	};
-	
+	private Frame frame;
 	//맵이 생길때마다 여기 하나씩 추가.
 	private ImageIcon story[] = {
 			new ImageIcon(imagePath + sceneName[0]),
@@ -44,15 +46,37 @@ public class Opning {
         
         bg.setContentPane(background);
         bg.setVisible(true);
-        try {
-        	//쓰레드를 오래 멈추는 것은 좀 위험하다. 다른 방법을 찾아보자.
-        	Thread.sleep(3000);
-        	nextMap(bg);
-        }catch (InterruptedException e) {}
-	}// Map()
+        
+     // MouseListener를 구현한 리스너 객체 생성
+        MouseListener opningMouse = new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            	if (storyNum + 1 >= sceneName.length - 1) {
+            		new Map(bg);
+            	}
+        		nextStory(bg);
+            }
+
+            // 나머지 MouseListener 메서드 구현
+            @Override
+            public void mousePressed(MouseEvent e) {}
+
+            @Override
+            public void mouseReleased(MouseEvent e) {}
+
+            @Override
+            public void mouseEntered(MouseEvent e) {}
+
+            @Override
+            public void mouseExited(MouseEvent e) {}
+        };
+        
+     // 패널에 마우스 리스너 추가
+        background.addMouseListener(opningMouse);
+	}
 	
 	//다음 맵
-	void nextMap(JFrame bg) {
+	void nextStory(JFrame bg) {
 		storyNum++;
 		background = new JPanel() {
             public void paintComponent(Graphics g) {
@@ -66,7 +90,7 @@ public class Opning {
 	}
 	
 	//이전 맵
-	void previousMap(JFrame bg) {
+	void previousStory(JFrame bg) {
 		storyNum--;
 		background = new JPanel() {
             public void paintComponent(Graphics g) {
@@ -77,6 +101,10 @@ public class Opning {
         };
         bg.setContentPane(background);
         bg.setVisible(true);
+	}
+	
+	JPanel getJPanel() {
+		return background;
 	}
 	
 }

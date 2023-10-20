@@ -9,15 +9,20 @@ public class Frame {
 	Frame(){
 		base.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		base.setTitle("미림 금칙어");
-		base.setSize(1000, 1000);
+		base.setSize(1241, 856);
 		base.setLayout(null);
 		base.setLocationRelativeTo(null);
 		base.setVisible(true);
 		
-		new Opning(getFrame());
+		new Opning(base);
+//		new Map(base);
 	}
 	
 	JFrame getFrame() {
 		return base;
 	}
+	
+//	void startMap() {
+//        new Map(base);
+//    }
 }

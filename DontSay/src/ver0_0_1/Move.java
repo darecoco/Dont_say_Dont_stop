@@ -8,15 +8,11 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class Move {
-    private JFrame frame;
     private JLabel imageLabel;
     private ImageIcon imageIcon;
     private int x, y;
     
-    public Move() {
-        frame = new JFrame("움직임 구현");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(800, 800);
+    public Move(JFrame frame) {
         
         // 이미지 로딩 및 JLabel 초기화
         imageIcon = new ImageIcon("./images/student.png"); // 이미지 경로 설정
@@ -67,11 +63,5 @@ public class Move {
         
         frame.setLayout(null);
         frame.setVisible(true);
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            new Move();
-        });
     }
 }
