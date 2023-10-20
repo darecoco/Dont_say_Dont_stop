@@ -14,8 +14,8 @@ public class Frame {
 		base.setLocationRelativeTo(null);
 		base.setVisible(true);
 		
-		new Opning(base);
-//		new Map(base);
+//		new Opning(base);
+		new Map(base);
 	}
 	
 	JFrame getFrame() {

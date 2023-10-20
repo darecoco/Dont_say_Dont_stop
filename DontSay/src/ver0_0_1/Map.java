@@ -61,35 +61,36 @@ public class Map {
             }
         };
         
-        previousMap(bg);
+//        previousMap(bg);
         bg.setContentPane(background);
         bg.setVisible(true);
         
      // MouseListener를 구현한 리스너 객체 생성
-        MouseListener mapMouse = new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
+//        MouseListener mapMouse = new MouseListener() {
+//            @Override
+//            public void mouseClicked(MouseEvent e) {
                 // 마우스 클릭 이벤트 처리
                 new Move(bg);
-//                new Teacher(background);
-            }
-
-            // 나머지 MouseListener 메서드 구현
-            @Override
-            public void mousePressed(MouseEvent e) {}
-
-            @Override
-            public void mouseReleased(MouseEvent e) {}
-
-            @Override
-            public void mouseEntered(MouseEvent e) {}
-
-            @Override
-            public void mouseExited(MouseEvent e) {}
-        };
+                bg.repaint();
+////                new Teacher(background);
+//            }
+//
+//            // 나머지 MouseListener 메서드 구현
+//            @Override
+//            public void mousePressed(MouseEvent e) {}
+//
+//            @Override
+//            public void mouseReleased(MouseEvent e) {}
+//
+//            @Override
+//            public void mouseEntered(MouseEvent e) {}
+//
+//            @Override
+//            public void mouseExited(MouseEvent e) {}
+//        };
         
      // 패널에 마우스 리스너 추가
-        bg.addMouseListener(mapMouse);
+//        bg.addMouseListener(mapMouse);
         
 	}// Map()
 	
@@ -105,6 +106,8 @@ public class Map {
         };
         bg.setContentPane(background);
         bg.setVisible(true);
+        new Move(bg);
+        bg.repaint();
 	}
 	
 	//이전 맵

@@ -1,9 +1,15 @@
 package ver0_0_1;
 
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 // Lv.1 은주쌤, 보경쌤
 
@@ -25,17 +31,47 @@ public class Teacher {
 	};
 	private JLabel text = new JLabel();
 	int t = 0;
+	private JFrame frame;
+	private JPanel panel;
+    private JLabel questionLabel;
+    private JTextField answerField;
+    private JButton checkButton;
+    private int num1, num2;
+    private String result="함기훈";
 	
-	Teacher(JPanel bg){
-		text.setBounds(10, 800, 100, 80);
+	Teacher(JFrame bg){
+		text.setBounds(50, 500, 1200, 80);
 		text.setText(script[t++]);
 		bg.add(text);
+		bg.repaint();
 		// MouseListener를 구현한 리스너 객체 생성
         MouseListener mouseListener = new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-            	if(t == script.length) {
-            		//
+            	
+            	
+                
+//                checkButton = new JButton("확인");
+//                panel.add(checkButton);
+            	if(t >= script.length - 1) {
+            		JTextField answer = new JTextField();
+	            	answer.setHorizontalAlignment(JTextField.CENTER);
+	            	answer.setBounds(50,550,180,30);
+	                bg.add(answer);
+	                bg.repaint();
+	                answer.addKeyListener(new KeyAdapter() {
+	                   @Override
+	                   public void keyPressed(KeyEvent e) {
+	                      if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+	                         String are = answer.getText();
+	                         if(result.equals(are)) {
+	                        	 text.setText("정답입니다!");
+	                        	 text.setLocation(50, 450);
+	                        	 bg.repaint();
+	                         }
+	                      }
+	                   }
+	                });
             	}else {
             		text.setText(script[t++]);
             	}
@@ -57,5 +93,6 @@ public class Teacher {
         
      // 패널에 마우스 리스너 추가
         bg.addMouseListener(mouseListener);
+       
 	}
 }

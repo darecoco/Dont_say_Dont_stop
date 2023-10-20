@@ -10,17 +10,19 @@ import java.awt.event.KeyListener;
 public class Move {
     private JLabel imageLabel;
     private ImageIcon imageIcon;
+    private int maxX = 1161; // x 좌표의 최대 값
+    private int maxY = 720; // y 좌표의 최대 값
     private int x, y;
     
     public Move(JFrame frame) {
-        
+    	
         // 이미지 로딩 및 JLabel 초기화
         imageIcon = new ImageIcon("./images/student.png"); // 이미지 경로 설정
         imageLabel = new JLabel(imageIcon);
         
         // 초기 위치 설정
-        x = 100;
-        y = 100;
+        x = 585;
+        y = 360;
         imageLabel.setBounds(x, y, imageIcon.getIconWidth(), imageIcon.getIconHeight());
         
         // 이미지 JLabel을 프레임에 추가
@@ -40,14 +42,34 @@ public class Move {
                 
                 // 방향키를 누를 때 x, y 좌표 이동
                 if (keyCode == KeyEvent.VK_LEFT) {
-                    x -= step;
-                } else if (keyCode == KeyEvent.VK_RIGHT) {
-                    x += step;
-                } else if (keyCode == KeyEvent.VK_UP) {
-                    y -= step;
-                } else if (keyCode == KeyEvent.VK_DOWN) {
-                    y += step;
-                }
+                    if(x + step <= 0) {
+                       x -= 0;
+                    } else {
+                         x -= step;                      
+                    }
+                 } else if (keyCode == KeyEvent.VK_RIGHT) {
+                    if(x + step >= maxX) {
+                       x = 0;
+                    	System.out.println("굿");
+                    	Map a = new Map(frame);
+                    	a.nextMap(frame);
+                    } else {
+                         x += step;                      
+                    }
+                 } else if (keyCode == KeyEvent.VK_UP) {
+                    if(y - step <= 0) {
+                       y -= 0;
+                    } else {
+                         y -= step;
+                    }
+                 } else if (keyCode == KeyEvent.VK_DOWN) {
+                    if(y + step >= maxY) {
+                       y = 0;
+                       new Teacher(frame);
+                    } else {
+                         y += step;                      
+                    }
+                 }
                 imageLabel.setBounds(x, y, imageIcon.getIconWidth(), imageIcon.getIconHeight());
             }
 
